@@ -1,0 +1,57 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5433:5432
+    restart: always
+    env_file:
+      - ./.env.prod.db
+    networks:
+      - backend
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    entrypoint: /home/app/web/run_entrypoint.sh
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    expose:
+      - 8000
+    restart: always
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - web
+    networks:
+      - frontend
+
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

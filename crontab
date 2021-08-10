@@ -1,0 +1,6 @@
+#* * * * * /home/app/web/run_cron.sh one >> /var/log/cron.log 2>&1
+#*/3 * * * * /home/app/web/run_cron.sh three >> /var/log/cron.log 2>&1
+#*/5 * * * * /home/app/web/run_cron.sh five >> /var/log/cron.log 2>&1
+#* * * * * date >> /var/log/cron.log 2>&1
+@reboot date >> /var/log/cron.log 2>&1
+# Don't remove the empty line at the end of this file. It is required to run the cron job
