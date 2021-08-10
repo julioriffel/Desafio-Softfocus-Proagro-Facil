@@ -1,3 +1,9 @@
+## POSTGIS
+
+### Requisitos GIS
+
+`sudo apt-get install binutils libproj-dev gdal-bin`
+
 ## DumpData
 
 `python manage.py dumpdata --exclude=contenttypes --exclude=auth.Permission > fixtures/all.json`

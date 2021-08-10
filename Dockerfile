@@ -13,7 +13,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # install cron dependencies
-RUN apt-get -y update && apt-get -y install cron
+RUN apt-get -y update && apt-get -y install cron binutils libproj-dev gdal-bin
 # Add crontab file in the cron directory
 ADD crontab /etc/cron.d/crontab
 # Give execution rights on the cron job
