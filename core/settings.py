@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django_filters',
     # 'chartjs',
     'debug_toolbar',
+
+    'proagro'
 ]
 
 MIDDLEWARE = [
@@ -158,3 +160,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
     '10.36.33.120',
 ]
+
+LOGIN_URL = '/conta/login/'
+LOGIN_REDIRECT_URL = '/carteira/'
+LOGOUT_REDIRECT_URL = '/conta/login/'

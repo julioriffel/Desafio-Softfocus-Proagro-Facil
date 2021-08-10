@@ -21,7 +21,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path("conta/", include("conta.urls")),
     path('admin/', admin.site.urls),
+    path("", include("proagro.urls")),
 ]
 urlpatterns += [
     url(r'^__debug__/', include(debug_toolbar.urls)),
