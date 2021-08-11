@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     # 'chartjs',
     'debug_toolbar',
+    "view_breadcrumbs",
 
     'proagro'
 ]
@@ -136,8 +137,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'core/static'),
@@ -158,9 +160,9 @@ STATICFILES_DIRS = (
 
 INTERNAL_IPS = [
     '127.0.0.1',
-    '10.36.33.120',
+    '0.0.0.0',
 ]
 
 LOGIN_URL = '/conta/login/'
-LOGIN_REDIRECT_URL = '/carteira/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/conta/login/'

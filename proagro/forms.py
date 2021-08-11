@@ -2,56 +2,55 @@
 #  Julio Cezar Riffel<julioriffel@gmail.com>
 from django import forms
 
-from proagro.models import Comunicado
+from proagro.models import Comunicado, Cultura
 
 
 class ComunicadoForm(forms.ModelForm):
-    cpf = forms.CharField(
-        attrs={
-            "placeholder": "CPF",
-            "class": "form-control"
-        }
-    )
-    nome = forms.CharField(
-        attrs={
-            "placeholder": "Nome",
-            "class": "form-control"
-        }
-    )
-    email = forms.EmailField(
-        attrs={
-            "placeholder": "Nome",
-            "class": "form-control"
-        }
-    )
-    latitude = forms.NumberInput(
-        attrs={
-            "placeholder": "Latitude",
-            "class": "form-control",
-        })
-    longitude = forms.NumberInput(
-        attrs={
-            "placeholder": "Longitude",
-            "class": "form-control"
-        })
-    datacolheita = forms.DateInput(format=('%d/%m/%Y'),
-                                   attrs={'class': 'form-control datepicker',
-                                          'data-date-format': 'dd/mm/yyyy'}),
-    tipo = forms.CharField(
-        widget=forms.Select(
-            attrs={
-                "placeholder": "Evento",
-                "class": "form-control"
-            },
+    cultura = forms.ModelChoiceField(queryset=Cultura.objects.all().order_by('nome'),
+                                     widget=forms.Select(attrs={
+                                         "class": "form-control",
+                                         "data-toggle": "select"
+                                     }))
 
-            choices=Comunicado.EVENTO_CHOISE
-        ))
+    class Meta:
+        model = Comunicado
+        fields = ['cpf', 'nome', 'email', 'latitude', 'longitude', 'cultura', 'datacolheita', 'evento']
+        widgets = {
+            'cpf': forms.TextInput(
+                attrs={
+                    "placeholder": "CPF",
+                    "class": "form-control"
+                }),
+            'nome': forms.TextInput(
+                attrs={
+                    "placeholder": "Nome",
+                    "class": "form-control"
+                }),
+            'latitude': forms.NumberInput(
+                attrs={
+                    "placeholder": "-23.123",
+                    "class": "form-control"
+                }),
+            'longitude': forms.NumberInput(
+                attrs={
+                    "placeholder": "-52.123",
+                    "class": "form-control"
+                }),
+            'email': forms.EmailInput(
+                attrs={
+                    "placeholder": "nome@email.com",
+                    "class": "form-control"
+                }),
+            'datacolheita': forms.DateInput(format=('%d/%m/%Y'),
+                                            attrs={'placeholder': '20/12/2021',
+                                                   'class': 'form-control datepicker',
+                                                   'data-date-format': 'dd/mm/yyyy'}),
+            'evento': forms.Select(
+                attrs={
+                    "placeholder": "Tipo",
+                    "class": "form-control"
+                },
 
-    # class Meta:
-    #     model = Comunicado
-    #     fields = ['']
-    #     widgets = {
-    #         'datacolheita': forms.DateInput(format=('%d/%m/%Y'),
-    #                                 attrs={'class': 'form-control datepicker',
-    #                                        'data-date-format': 'dd/mm/yyyy'}),
-    #     }
+                choices=Comunicado.EVENTO_CHOISE
+            )
+        }

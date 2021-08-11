@@ -1,0 +1,22 @@
+
+
+{% for url, label in breadcrumbs %}
+    {% if forloop.first %}
+
+        {% with breadcrumbs|last as last %}
+            <h6 class="h2 text-white d-inline-block mb-0">{{ last.1 }}</h6>
+        {% endwith %}
+
+        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+        <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
+    {% elif not url or forloop.counter == breadcrumbs_total %}
+        <li class="breadcrumb-item{% if forloop.counter == breadcrumbs_total %} active{% endif %}"
+            {% if forloop.counter == breadcrumbs_total %}aria-current="page"{% endif %}>{{ label|safe }}</li>
+    {% else %}
+        <li class="breadcrumb-item"><a href="{{ url }}">{{ label|safe }}</a></li>
+    {% endif %}
+{% endfor %}
+
+</ol>
+</nav>

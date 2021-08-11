@@ -3,4 +3,6 @@
 
 from django.contrib import admin
 
-# Register your models here.
+from proagro.models import Cultura
+
+admin.site.register(Cultura)

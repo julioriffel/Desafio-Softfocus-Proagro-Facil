@@ -1,0 +1,202 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% load l10n %}
+{% load static %}
+
+{% block title %} User Profile {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header pb-6 d-flex align-items-center"
+         style="min-height: 100px;background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+
+        <div class="row">
+
+            <div class="col-xl-6 order-xl-1">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">DETALHES </h3>
+                            </div>
+
+                            <div class="col-4 text-right">
+                                <a href="{% url 'proagro:create' %}" class="btn btn-sm btn-primary">Novo</a>
+                                <a href="{% url 'proagro:update' pk=object.id %}" class="btn btn-sm btn-info">Editar</a>
+                                <a href="{% url 'proagro:index' %}" class="btn btn-sm btn-default">Voltar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <h6 class="heading-small text-muted mb-4">Dados Pessoais</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">Nome</label>
+                                            <input type="text" id="input-first-name" class="form-control"
+                                                   placeholder="Nome" value="{{ object.nome }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">CPF</label>
+                                            <input type="text" id="input-username" class="form-control"
+                                                   placeholder="Username" value="{{ object.cpf }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email</label>
+                                            <input type="email" id="input-email" class="form-control"
+                                                   value="{{ object.email }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-4"/>
+                            <!-- Address -->
+                            <h6 class="heading-small text-muted mb-4">Produção</h6>
+
+
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-city">Cultura</label>
+                                            <input type="text" id="input-city" class="form-control"
+                                                   value="{{ object.cultura }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-country">Data Colheita</label>
+                                            <input type="text" id="input-country" class="form-control"
+                                                   placeholder="Country" value="{{ object.datacolheita }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-country">Evento</label>
+                                            <input type="text" id="input-postal-code" class="form-control"
+                                                   value="{{ object.get_evento_display }}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Latitude</label>
+                                            <input type="text" id="input-username" class="form-control"
+                                                   placeholder="Username" value="{{ object.latitude }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Longitude</label>
+                                            <input type="email" id="input-email" class="form-control"
+                                                   value="{{ object.longitude }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <a href="https://www.google.com/maps/?q={{ object.latitude|unlocalize }},{{ object.longitude|unlocalize }}"
+                                           target="_blank">
+                                            <button type="button" class="btn-icon-clipboard">
+                                                <div>
+                                                    <i class="ni ni-square-pin"></i>
+                                                    <span>Google Maps</span>
+                                                </div>
+                                            </button>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 order-xl-1">
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 class="mb-0">Proximidade </h3>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <h6 class="heading-small text-muted mb-4">Dados Pessoais</h6>
+
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush table-striped">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>distancia</th>
+                                    <th>Cultura</th>
+                                    <th>Data Colheita</th>
+                                    <th>Evento</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for item in prox %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'proagro:detail' pk=item.id %}">{{ item.id }} </a>
+                                        </td>
+
+                                        <td>{{ item.distance.m|floatformat:0}} metros</td>
+                                        <td>{{ item.cultura }}</td>
+                                        <td>{{ item.datacolheita }}</td>
+                                        <td>{{ item.get_evento_display }}</td>
+
+
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

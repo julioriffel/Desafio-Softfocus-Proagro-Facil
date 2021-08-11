@@ -1,0 +1,59 @@
+<div class="modal fade" id="confirmModal" tabindex="-1" caller-id="" role="dialog" aria-labelledby="confirmModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Type your modal
+                    title</h6>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-message">
+                Do you wish to proceed?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmButtonModal">Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+        var buttons = document.querySelectorAll("[data-target='#confirmModal']");
+        for (const button of buttons) {
+            button.addEventListener("click", function (event) {
+                // find the modal and add the caller-id as an attribute
+                var modal = document.getElementById("confirmModal");
+                modal.setAttribute("caller-id", this.getAttribute("id"));
+
+                // extract texts from calling element and replace the modals texts with it
+                if ("message" in this.dataset) {
+                    document.getElementById("modal-message").innerHTML = this.dataset.message;
+                }
+
+                if ("buttontext" in this.dataset) {
+                    document.getElementById("confirmButtonModal").innerHTML = this.dataset.buttontext;
+                }
+
+                if ("title" in this.dataset) {
+                    document.getElementById("modal-title-default").innerHTML = this.dataset.title;
+                }
+
+            })
+        }
+
+        document.getElementById("confirmButtonModal").onclick = () => {
+            // when the Confirm Button in the modal is clicked
+            var button_clicked = event.target
+            var caller_id = button_clicked.closest("#confirmModal").getAttribute("caller-id");
+            var caller = document.getElementById(caller_id);
+            // open the url that was specified for the caller
+            window.location = caller.getAttribute("href");
+        };
+    });
+</script>

@@ -29,7 +29,7 @@
                    aria-expanded="false">
                     <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="/static/assets/img/theme/team-1-800x800.jpg">
+{#                <img alt="Image placeholder" src="/static/assets/img/theme/team-1-800x800.jpg">#}
               </span>
                     </div>
                 </a>
@@ -97,57 +97,28 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class=" nav-link {% if 'index' in segment %} active {% endif %}" href="/"> <i
-                            class="ni ni-tv-2 text-primary"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'icons' in segment %} active {% endif %}" href="/icons.html">
-                        <i class="ni ni-planet text-blue"></i> Icons
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'maps' in segment %} active {% endif %}" href="/maps.html">
-                        <i class="ni ni-pin-3 text-orange"></i> Maps
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'profile' in segment %} active {% endif %}" href="/profile.html">
-                        <i class="ni ni-single-02 text-yellow"></i> User profile
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'tables' in segment %} active {% endif %}" href="/tables.html">
-                        <i class="ni ni-bullet-list-67 text-info"></i> Tables
+                            class="ni ni-tv-2 text-primary"></i> Comunicado
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a class=" nav-link {% if 'index' in segment %} active {% endif %}"
+                       href="{% url 'proagro:create' %}"> <i
+                            class="ni ni-fat-add text-green"></i> Novo
+                    </a>
+                </li>
+
+
+            </ul>
+            <!-- Divider -->
+            <hr class="my-3">
+            <!-- Heading -->
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">
                         <i class="ni ni-user-run text-red"></i> Logout
                     </a>
                 </li>
-            </ul>
-            <!-- Divider -->
-            <hr class="my-3">
-            <!-- Heading -->
-            <h6 class="navbar-heading text-muted">Links</h6>
-            <!-- Navigation -->
-            <ul class="navbar-nav mb-md-3">
-
-                <li class="nav-item">
-                    <a class="nav-link" target="_blank"
-                       href="https://github.com/creativetimofficial/argon-dashboard-django">
-                        <i class="ni ni-ui-04"></i> Source Code
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" target="_blank"
-                       href="https://www.creative-tim.com/templates/django">
-                        <i class="ni ni-spaceship"></i> More Django Apps
-                    </a>
-                </li>
-
             </ul>
         </div>
     </div>

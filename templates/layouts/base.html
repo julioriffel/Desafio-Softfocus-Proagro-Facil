@@ -1,3 +1,6 @@
+{% load view_breadcrumbs %}
+{% load static %}
+
 <!--
 
 =========================================================
@@ -35,8 +38,10 @@
     <!-- Icons -->
     <link href="/static/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet"/>
     <link href="/static/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet"/>
+
     <!-- CSS Files -->
-    <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet"/>
+    <link href="/static/assets/css/argon-dashboard.css" rel="stylesheet"/>
+
 
     <!-- Specific CSS goes HERE -->
     {% block stylesheets %}{% endblock stylesheets %}
@@ -47,18 +52,76 @@
 
 {% include "includes/sidenav.html" %}
 
-<div class="main-content">
+<!-- Main content -->
+<div class="main-content" id="panel">
 
-    {% include "includes/navigation.html" %}
+    {% include 'includes/navigation.html' %}
 
-    {% block content %}{% endblock content %}
+    <!-- Page content -->
+    {% block content_full %}
+        <div class="header bg-primary pb-6">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-5">
+                        <div class="col-lg-6 col-7">
+                            {% render_breadcrumbs "includes/breadcrumbs.html" %}
+
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            {% block head_buttons %}
+                            {% endblock head_buttons %}
+
+                        </div>
+                    </div>
+                    {% block header_content %}{% endblock header_content %}
+                </div>
+            </div>
+
+        </div>
+        {% block content %}{% endblock content %}
+    {% endblock content_full %}
 
 </div>
 
-{% include "includes/scripts.html" %}
+<script src="{% static 'assets/vendor/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/vendor/js-cookie/js.cookie.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %}"></script>
+<script src="{% static 'assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+
+{#    <script src="{% static 'assets/vendor/sweetalert2/dist/sweetalert2.min.js' %}"></script>#}
+<script src="{% static 'assets/vendor/bootstrap-notify/bootstrap-notify.min.js' %}"></script>
+
+
+<!--   Argon JS   -->
+<script src="{% static 'assets/js/argon-dashboard.js' %}"></script>
+
 
 <!-- Specific JS goes HERE -->
-{% block javascripts %}{% endblock javascripts %}
+
+<script>
+    {% for message in messages %}
+        $.notify({
+                {#title: '{{ message.tags|upper }}',#}
+                text: '{{ message }}.',
+                message: '{{ message }}.',
+                type: 'danger',
+                hide: false,
+                icon: 'ni ni-bell-55',
+                styling: 'bootstrap',
+                align: 'center',
+                closer_hover: false,
+                sticker_hover: false,
+            }, {
+                type: '{{ message.tags }}',
+                placement: {
+                    align: 'center'
+                }
+            }
+        );
+    {% endfor %}
+</script>
+
 
 </body>
 

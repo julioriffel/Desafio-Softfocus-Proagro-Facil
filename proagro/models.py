@@ -2,21 +2,52 @@
 #  Julio Cezar Riffel<julioriffel@gmail.com>
 
 from django.conf import settings
+from django.contrib.gis.db.models import PointField
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+
+class Cultura(models.Model):
+    nome = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nome
 
 
 class Comunicado(models.Model):
     EVENTO_CHOISE = [
-        (1, ''),
+        ('CHV', 'Chuva Excessica'),
+        ('GEA', 'Geada'),
+        ('GRA', 'Granizo'),
+        ('SEC', 'Seca'),
+        ('VEN', 'Vendaval'),
+        ('RAI', 'Raio')
+
     ]
     cpf = models.CharField(max_length=11)
     nome = models.CharField(max_length=150)
     email = models.EmailField(null=True, blank=True)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(
+        validators=[
+            MaxValueValidator(6),
+            MinValueValidator(-34)
+        ]
+    )
+    longitude = models.FloatField(
+        validators=[
+            MaxValueValidator(-7),
+            MinValueValidator(-74)
+        ]
+    )
+    ponto = PointField(blank=True, null=True)
+    cultura = models.ForeignKey(Cultura, on_delete=models.RESTRICT)
+    evento = models.CharField(max_length=3, choices=EVENTO_CHOISE)
     datacolheita = models.DateField()
-    evento = models.IntegerField(choices=EVENTO_CHOISE)
 
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL)
     criado = models.DateTimeField(auto_now_add=True)
     atualizado = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('proagro:detail', kwargs={'pk': self.pk})

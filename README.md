@@ -74,10 +74,36 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 ### GeoDjango
 
-[requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
+[GeoDjango requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
+
 `sudo apt-get install binutils libproj-dev gdal-bin`
 
+```shell
+python -m venv venv
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt -U
+
+```
+
 # Orientações
+
+### Testes/Homologação
+
+Requer `docker + docker-compose` e a porta `80` disponível
+
+```shell
+cp .env.example .env
+cp .env.prod.db.example .env.prod.db
+cp .env.prod.example .env.prod
+docker-compose up -d
+docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py createsuperuser
+```
+
+Acesse: [http://localhost](http://localhost)
+
+
 
 ## DumpData
 
