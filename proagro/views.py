@@ -8,7 +8,7 @@ from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.views import generic
 from view_breadcrumbs import ListBreadcrumbMixin
@@ -18,7 +18,7 @@ from proagro.models import Comunicado
 
 
 class ProagroIndex(LoginRequiredMixin, ListBreadcrumbMixin, generic.ListView):
-    paginate_by = 5
+    paginate_by = 10
 
     @cached_property
     def crumbs(self):
@@ -62,7 +62,7 @@ class ComunicadoUpdate(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateVi
     model = Comunicado
     form_class = ComunicadoForm
     success_message = "Salvo"
-    success_url = reverse_lazy("proagro:index")
+
 
     def form_valid(self, form):
         comunicado = form.save(commit=False)
@@ -81,9 +81,8 @@ class ComunicadoDetail(LoginRequiredMixin, generic.DetailView):
         ref_location = self.object.ponto
 
         context['prox'] = Comunicado.objects.exclude(id=self.object.pk).filter(
-            ponto__dwithin=(ref_location, distance)).filter(
-            ponto__distance_lte=(ref_location, D(m=distance))).annotate(
-            distance=Distance('ponto', ref_location)).order_by('distance')
+            ponto__dwithin=(ref_location, distance)).annotate(
+            distance=Distance('ponto', ref_location)).order_by('distance')[:10]
 
         qtd = Comunicado.objects.exclude(id=self.object.pk).exclude(evento=self.object.evento).filter(
             ponto__dwithin=(ref_location, distance)).filter(

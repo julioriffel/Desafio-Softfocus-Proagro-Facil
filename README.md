@@ -86,6 +86,15 @@ pip install -r requirements.txt -U
 
 ```
 
+### Testes
+
+```shell
+pip install coverage
+python manage.py test
+coverage run --source='proagro' manage.py test proagro
+coverage report
+```
+
 # Orientações
 
 ### Testes/Homologação

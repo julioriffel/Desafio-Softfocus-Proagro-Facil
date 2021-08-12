@@ -8,7 +8,7 @@ from django.db import models
 
 
 class Cultura(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField("Nome cultura", max_length=100, unique=True)
 
     def __str__(self):
         return self.nome

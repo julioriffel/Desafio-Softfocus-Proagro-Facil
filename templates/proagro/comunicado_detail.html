@@ -150,7 +150,7 @@
                     </div>
                     <div class="card-body">
 
-                        <h6 class="heading-small text-muted mb-4">Dados Pessoais</h6>
+
 
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush table-striped">
@@ -172,7 +172,7 @@
                                             <a href="{% url 'proagro:detail' pk=item.id %}">{{ item.id }} </a>
                                         </td>
 
-                                        <td>{{ item.distance.m|floatformat:0}} metros</td>
+                                        <td>{{ item.distance.km|floatformat:1 }} km</td>
                                         <td>{{ item.cultura }}</td>
                                         <td>{{ item.datacolheita }}</td>
                                         <td>{{ item.get_evento_display }}</td>

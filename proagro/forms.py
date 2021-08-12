@@ -7,10 +7,13 @@ from proagro.models import Comunicado, Cultura
 
 class ComunicadoForm(forms.ModelForm):
     cultura = forms.ModelChoiceField(queryset=Cultura.objects.all().order_by('nome'),
+                                     help_text="Selecione a cultura",
                                      widget=forms.Select(attrs={
                                          "class": "form-control",
                                          "data-toggle": "select"
-                                     }))
+                                     },
+
+                                     ))
 
     class Meta:
         model = Comunicado
