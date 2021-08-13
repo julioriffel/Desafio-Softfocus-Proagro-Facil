@@ -1,3 +1,4 @@
+![](media/coverage_geral.svg)
 # Desafio Softfocus
 
 ## Web Developer Python - Pleno
@@ -36,13 +37,13 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
    g. Evento ocorrido, sendo os eventos possíveis:
 
-    - i. CHUVA EXCESSIVA
+   - i. CHUVA EXCESSIVA
 
-    - ii. GEADA
-    - iii. GRANIZO
-    - iv. SECA
-    - v. VENDAVAL
-    - vi. RAIO
+   - ii. GEADA
+   - iii. GRANIZO
+   - iv. SECA
+   - v. VENDAVAL
+   - vi. RAIO
 
 6. Quando o analista estiver cadastrando uma nova comunicação de perda, queremos garantir a veracidade do evento
    informado. Por isso, caso já exista um cadastro no banco de dados, com mesma data, cuja localização esteja em um raio
@@ -88,10 +89,16 @@ pip install -r requirements.txt -U
 
 ### Testes
 
+![](media/coverage_proagro.svg) Proagro    
+![](media/coverage_api.svg) Api  
+![](media/coverage_conta.svg) Conta
+
+[(coverage-badge)](https://github.com/dbrgn/coverage-badge)
+
 ```shell
-pip install coverage
 python manage.py test
-coverage run --source='proagro' manage.py test proagro
+pip install coverage
+coverage run --source=proagro,api,conta manage.py test
 coverage report
 ```
 
@@ -112,7 +119,9 @@ docker-compose exec web python manage.py createsuperuser
 
 Acesse: [http://localhost](http://localhost)
 
+### Api
 
+![](media/swagger.png)
 
 ## DumpData
 

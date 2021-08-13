@@ -4,11 +4,11 @@ import datetime
 from random import randint
 
 from django.contrib.auth.models import User
-from django.contrib.gis.geos import Point
 from django.test import TestCase
 from django.urls import reverse
 
 from proagro.models import Cultura, Comunicado
+from proagro.util_proagro import gerarCPF, gerarLatitude, gerarLongitude, gerarData
 
 
 class ComunicadoViewTest(TestCase):
@@ -19,12 +19,6 @@ class ComunicadoViewTest(TestCase):
         user = User.objects.create_user(username='user1', password='abcd1234')
         user.save()
 
-        def gerarCPF():
-            cpf = ''
-            for i in range(11):
-                cpf += str(randint(0, 9))
-            return cpf
-
         ids_cultura = []
         culturas = ["Arroz", "Feijão", "Milho", "Soja", "Trigo"]
         for cultura in culturas:
@@ -32,23 +26,19 @@ class ComunicadoViewTest(TestCase):
             ids_cultura.append(item.id)
 
         milho = Cultura.objects.get(nome="Milho")
-        cls.exemplo_valido = {'cpf': '06889117905', 'nome': 'Julio', 'email': 'julioriffel@gmail.com',
-                              'latitude': -22.123, 'longitude': -52.123, 'cultura': milho.id,
+        cls.exemplo_valido = {'cpf': gerarCPF(), 'nome': 'Julio', 'email': 'julioriffel@gmail.com',
+                              'latitude': gerarLatitude(), 'longitude': gerarLongitude(), 'cultura': milho.id,
                               'datacolheita': datetime.date.today(), 'evento': "GEA"}
 
         for id in range(17):
             cultura_id = ids_cultura[randint(0, len(ids_cultura) - 1)]
-            latitude = randint(-3400, 600) / 100
-            longitude = randint(-7400, -700) / 100
-            ponto = Point(latitude, longitude)
             Comunicado.objects.create(nome=f"Nome {id}",
                                       cultura_id=cultura_id,
                                       cpf=gerarCPF(),
                                       email=f"nome{id}@mail.com",
-                                      latitude=latitude,
-                                      longitude=longitude,
-                                      ponto=ponto,
-                                      datacolheita=datetime.date.fromtimestamp(randint(1609462861, 1640998861)),
+                                      latitude=gerarLatitude(),
+                                      longitude=gerarLongitude(),
+                                      datacolheita=gerarData(),
                                       evento=Comunicado.EVENTO_CHOISE[randint(0, len(Comunicado.EVENTO_CHOISE) - 1)][0])
 
     def test_view_home_login_required(self):

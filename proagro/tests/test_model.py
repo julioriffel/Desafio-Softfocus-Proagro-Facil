@@ -3,6 +3,7 @@
 from django.test import TestCase
 
 from proagro.models import Cultura, Comunicado
+from proagro.util_proagro import gerarLatitude, gerarLongitude, gerarCPF
 
 
 class CulturaClass(TestCase):
@@ -41,9 +42,9 @@ class ComunicadoClass(TestCase):
         milho, create = Cultura.objects.get_or_create(nome="Milho")
         evento = Comunicado.EVENTO_CHOISE[0][0]
 
-        Comunicado.objects.create(cpf="06889117905", nome="Julio Cezar Riffel", latitude=-23.123, longitude=-52.123,
-                                  cultura=milho, evento=evento, datacolheita='2021-07-20')
+        Comunicado.objects.create(cpf=gerarCPF(), nome="Julio Cezar Riffel", latitude=gerarLatitude(),
+                                  longitude=gerarLongitude(), cultura=milho, evento=evento, datacolheita='2021-07-20')
 
     def test_get_absolute_url(self):
-        comunicado = Comunicado.objects.get(id=1)
+        comunicado = Comunicado.objects.first()
         self.assertEquals(comunicado.get_absolute_url(), f'/comunicados/{comunicado.id}')

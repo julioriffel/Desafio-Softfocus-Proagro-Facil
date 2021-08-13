@@ -3,6 +3,7 @@
 
 from django.conf import settings
 from django.contrib.gis.db.models import PointField
+from django.contrib.gis.geos import Point
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
@@ -51,3 +52,7 @@ class Comunicado(models.Model):
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('proagro:detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        self.ponto = Point(self.latitude, self.longitude)
+        super(Comunicado, self).save(*args, **kwargs)

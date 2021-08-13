@@ -45,12 +45,16 @@ INSTALLED_APPS = [
 
     'django.contrib.gis',
 
+    'rest_framework',
+    'drf_yasg',
+
     'django.contrib.humanize',
     'django_filters',
     # 'chartjs',
     'debug_toolbar',
     "view_breadcrumbs",
 
+    'api',
     'proagro'
 ]
 
@@ -166,3 +170,8 @@ INTERNAL_IPS = [
 LOGIN_URL = '/conta/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/conta/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

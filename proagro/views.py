@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.gis.db.models.functions import Distance
-from django.contrib.gis.geos import Point
 from django.contrib.gis.measure import D
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
@@ -53,7 +52,6 @@ class ComunicadoCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVi
     def form_valid(self, form):
         comunicado = form.save(commit=False)
         comunicado.usuario = self.request.user
-        comunicado.ponto = Point(comunicado.latitude, comunicado.longitude)
         comunicado.save()
         return super().form_valid(form)
 
@@ -63,11 +61,9 @@ class ComunicadoUpdate(LoginRequiredMixin, SuccessMessageMixin, generic.UpdateVi
     form_class = ComunicadoForm
     success_message = "Salvo"
 
-
     def form_valid(self, form):
         comunicado = form.save(commit=False)
         comunicado.usuario = self.request.user
-        comunicado.ponto = Point(comunicado.latitude, comunicado.longitude)
         comunicado.save()
         return super().form_valid(form)
 
