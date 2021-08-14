@@ -34,7 +34,11 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                     </div>
-                                    {{ form.username }}
+
+                                    <input type="text" name="{{ form.username.name }}" placeholder="Usuário"
+                                           class="form-control" maxlength="{{ form.username.field.max_length }}"
+                                           required="{{ form.username.field.required }}"
+                                           id="{{ form.username.id_for_label }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -42,7 +46,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    {{ form.password }}
+                                    <input type="password" name="{{ form.password.name }}" placeholder="Password"
+                                           class="form-control"
+                                           required="" id="{{ form.password.id_for_label }}">
                                 </div>
                             </div>
                             <div class="custom-control custom-control-alternative custom-checkbox">
@@ -52,7 +58,7 @@
                                 </label>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary my-4">Sign in</button>
+                                <button type="submit" class="btn btn-primary my-4">Login</button>
                             </div>
                         </form>
                     </div>
@@ -62,7 +68,7 @@
                         <a href="{% url 'register' %}" class="text-light"><small>Criar Conta</small></a>
                     </div>
                     <div class="col-6 text-right">
-
+                        <a href="{% url 'password_reset' %}" class="text-light"><small>Esqueci a senha</small></a>
                     </div>
                 </div>
             </div>

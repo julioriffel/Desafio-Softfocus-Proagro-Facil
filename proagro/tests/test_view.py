@@ -16,8 +16,7 @@ class ComunicadoViewTest(TestCase):
 
     def setUp(cls):
 
-        user = User.objects.create_user(username='user1', password='abcd1234')
-        user.save()
+        User.objects.create_user(username='user1', password='abcd1234')
 
         ids_cultura = []
         culturas = ["Arroz", "Feijão", "Milho", "Soja", "Trigo"]

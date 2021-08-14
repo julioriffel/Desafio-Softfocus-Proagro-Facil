@@ -99,7 +99,7 @@
 
 <!-- Specific JS goes HERE -->
 
-<script>
+<script type="text/javascript">
     {% for message in messages %}
         $.notify({
                 {#title: '{{ message.tags|upper }}',#}
@@ -121,7 +121,6 @@
         );
     {% endfor %}
 </script>
-
 
 </body>
 

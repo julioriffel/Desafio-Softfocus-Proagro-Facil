@@ -49,12 +49,13 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     'django.contrib.humanize',
-    'django_filters',
+    # 'django_filters',
     # 'chartjs',
     'debug_toolbar',
     "view_breadcrumbs",
 
     'api',
+    'conta',
     'proagro'
 ]
 
@@ -153,15 +154,6 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 
-# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-
-# Firebase etf
-# file = os.path.join(BASE_DIR, 'folder/serviceAccountKey.json')
-# cred = credentials.Certificate(file)
-# app_firebase = firebase_admin.initialize_app(cred, {
-#     'databaseURL': "https://app_firebase.firebaseio.com",
-# }, name='app_firebase')
-
 INTERNAL_IPS = [
     '127.0.0.1',
     '0.0.0.0',
@@ -175,3 +167,5 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

@@ -1,4 +1,5 @@
 ![](media/coverage_geral.svg)
+
 # Desafio Softfocus
 
 ## Web Developer Python - Pleno
@@ -115,6 +116,7 @@ cp .env.prod.example .env.prod
 docker-compose up -d
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
+docker-compose exec web python manage.py loaddata fixtures/proagro.json
 ```
 
 Acesse: [http://localhost](http://localhost)

@@ -14,21 +14,7 @@
             <div class="col-lg-6 col-md-8">
 
                 <div class="card bg-secondary shadow border-0">
-                    <div class="card-header bg-transparent pb-5">
-                        <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-                        <div class="text-center">
-                            <a href="#" class="btn btn-neutral btn-icon mr-4">
-                                <span class="btn-inner--icon"><img
-                                        src="/static/assets/img/icons/common/github.svg"></span>
-                                <span class="btn-inner--text">Github</span>
-                            </a>
-                            <a href="#" class="btn btn-neutral btn-icon">
-                                <span class="btn-inner--icon"><img
-                                        src="/static/assets/img/icons/common/google.svg"></span>
-                                <span class="btn-inner--text">Google</span>
-                            </a>
-                        </div>
-                    </div>
+
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
 
@@ -44,7 +30,7 @@
                         {% if success %}
 
                             <p class="text-center">
-                                Please <a href={% url 'login' %} class="text-black text-small">authenticate</a> using
+                                Please <a href={% url 'login' %} class="text-black text-small"> authenticate</a> using
                                 the new account.
                             </p>
 
@@ -68,7 +54,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        {{ form.email }}
+                                        <input type="email" name="email" placeholder="E-mail" class="form-control"
+                                               required="" id="id_email">
                                     </div>
                                 </div>
                                 <span class="text-error">{{ form.email.errors }}</span>
@@ -97,7 +84,7 @@
                                     <div class="col-12">
                                         <div class="custom-control custom-control-alternative custom-checkbox">
                                             <input class="custom-control-input" id="customCheckRegister"
-                                                   type="checkbox">
+                                                   type="checkbox" required>
                                             <label class="custom-control-label" for="customCheckRegister">
                                                 <span class="text-muted">I agree with the <a
                                                         href="#!">Privacy Policy</a></span>
@@ -124,8 +111,7 @@
                 <a href="{% url 'login' %}" class="text-light"><small>Login</small></a>
             </div>
             <div class="col-3 text-right">
-                <a target="_blank"
-                   href="https://appseed.us" class="text-light"><small>LIVE Support</small></a>
+
             </div>
         </div>
 

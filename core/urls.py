@@ -10,6 +10,7 @@ from api.api_docs import docs_urls
 urlpatterns = [
                   path("api/", include("api.urls")),
                   path("conta/", include("conta.urls")),
+                  path('conta/', include('django.contrib.auth.urls')),
                   path('admin/', admin.site.urls),
                   path("", include("proagro.urls")),
               ] + docs_urls

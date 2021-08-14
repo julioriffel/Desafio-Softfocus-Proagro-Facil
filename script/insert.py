@@ -5,20 +5,13 @@ import os
 from random import randint
 
 import django
-from django.contrib.gis.geos import Point
+
+from proagro import util_proagro
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
 from proagro.models import Cultura, Comunicado
-
-
-def gerarCPF():
-    cpf = ''
-    for i in range(11):
-        cpf += str(randint(0, 9))
-    return cpf
-
 
 ids_cultura = []
 culturas = ["Arroz", "Feijão", "Milho", "Soja", "Trigo"]
@@ -28,15 +21,12 @@ for cultura in culturas:
 
 for id in range(25):
     cultura_id = ids_cultura[randint(0, len(ids_cultura) - 1)]
-    latitude = randint(-3400, 600) / 100
-    longitude = randint(-7400, -700) / 100
-    ponto = Point(latitude, longitude)
+
     Comunicado.objects.create(nome=f"Nome {id}",
                               cultura_id=cultura_id,
-                              cpf=gerarCPF(),
+                              cpf=util_proagro.gerarCPF(),
                               email=f"nome{id}@mail.com",
-                              latitude=latitude,
-                              longitude=longitude,
-                              ponto=ponto,
+                              latitude=util_proagro.gerarLatitude(),
+                              longitude=util_proagro.gerarLongitude(),
                               datacolheita=datetime.date.fromtimestamp(randint(1609462861, 1640998861)),
                               evento=Comunicado.EVENTO_CHOISE[randint(0, len(Comunicado.EVENTO_CHOISE) - 1)][0])
