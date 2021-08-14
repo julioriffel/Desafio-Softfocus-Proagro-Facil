@@ -19,10 +19,11 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 ## Critérios essenciais
 
 1. :heavy_check_mark: A solução deve ser desenvolvida em Python (utilize o framework de sua preferência);
-2. A solução deve possibilitar o cadastro, visualização, atualização e exclusão de uma comunicação de perda;
-3. Crie a interface Web com o framework que desejar;
-4. Os dados devem ser salvos em um dos banco de dados: Postgres, MySQL, MongoDB ou Firebase;
-5. A comunicação de perda deve ter os seguintes campos:
+2. :heavy_check_mark: A solução deve possibilitar o cadastro, visualização, atualização e exclusão de uma comunicação de
+   perda;
+3. :heavy_check_mark: Crie a interface Web com o framework que desejar;
+4. :heavy_check_mark: Os dados devem ser salvos em um dos banco de dados: Postgres, MySQL, MongoDB ou Firebase;
+5. :heavy_check_mark: A comunicação de perda deve ter os seguintes campos:
 
    a. Nome do produtor rural;
 
@@ -46,28 +47,30 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
    - v. VENDAVAL
    - vi. RAIO
 
-6. Quando o analista estiver cadastrando uma nova comunicação de perda, queremos garantir a veracidade do evento
-   informado. Por isso, caso já exista um cadastro no banco de dados, com mesma data, cuja localização esteja em um raio
-   de 10km da localização da nova comunicação de perda e for um evento divergente do que já consta no banco de dados, o
-   analista deverá ser informado;
+6. :heavy_check_mark: Quando o analista estiver cadastrando uma nova comunicação de perda, queremos garantir a
+   veracidade do evento informado. Por isso, caso já exista um cadastro no banco de dados, com mesma data, cuja
+   localização esteja em um raio de 10km da localização da nova comunicação de perda e for um evento divergente do que
+   já consta no banco de dados, o analista deverá ser informado;
 
-7. O projeto deverá conter validações para que o CPF e e-mail informados sejam válidos (feito em Javascript);
+7. :heavy_check_mark: O projeto deverá conter validações para que o CPF e e-mail informados sejam válidos (feito em
+   Javascript);
 
-8. Deve ser possível realizar a busca de uma comunicação de perda pelo CPF do produtor (front-end);
+8. :heavy_check_mark: Deve ser possível realizar a busca de uma comunicação de perda pelo CPF do produtor (front-end);
 
-9. O projeto deverá ser disponibilizado em repositório online, como Github, Gitlab, etc;
+9. :heavy_check_mark: O projeto deverá ser disponibilizado em repositório online, como Github, Gitlab, etc;
 
 10. O repositório deve conter um arquivo README explicando como utilizar o projeto.
-11. Implementar testes automatizados;
+11. :heavy_check_mark: Implementar testes automatizados;
 
 ## Critérios opcionais
 
 - Utilizar um framework front-end (Angular, React, Vue, Ember JS, etc);
-- Deixar a comunicação de perda intuitiva e com uma interface agradável também será um diferencial (utilização de CSS);
+- :heavy_check_mark: Deixar a comunicação de perda intuitiva e com uma interface agradável também será um diferencial (
+  utilização de CSS);
 - Fazer deploy do projeto (ex.: Heroku, Surge.sh, Pythonanywhere, AWS, etc)
   e disponibilizar a URL para acesso;
-- Disponibilizar a aplicação em forma de API para consulta e manipulação das comunicações de perda;
-- Disponibilizar a documentação da API (Swagger, Apiary, Document360, etc);
+- :heavy_check_mark: Disponibilizar a aplicação em forma de API para consulta e manipulação das comunicações de perda;
+- :heavy_check_mark: Disponibilizar a documentação da API (Swagger, Apiary, Document360, etc);
 - Qualquer funcionalidade extra será bem-vinda.
 
 # Detalhes:
@@ -90,11 +93,7 @@ pip install -r requirements.txt -U
 
 ### Testes
 
-![](media/coverage_proagro.svg) Proagro    
-![](media/coverage_api.svg) Api  
-![](media/coverage_conta.svg) Conta
-
-[(coverage-badge)](https://github.com/dbrgn/coverage-badge)
+![](media/coverage_geral.svg)
 
 ```shell
 python manage.py test
@@ -119,7 +118,7 @@ docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py loaddata fixtures/proagro.json
 ```
 
-Acesse: [http://localhost](http://localhost)
+Disponivel em: [http://localhost](http://localhost)
 
 ### Api
 
@@ -131,6 +130,7 @@ Acesse: [http://localhost](http://localhost)
 
 `python manage.py dumpdata --exclude=contenttypes --exclude=auth.Permission > /home/julioriffel/Dropbox/devs/adapar/adapar_rede/all.json`
 
-## Ref
+### Referências:
 
-Template: https://github.com/creativetimofficial/argon-dashboard-django
+[Template Argon](https://github.com/creativetimofficial/argon-dashboard-django)
+, [coverage-badge](https://github.com/dbrgn/coverage-badge),  
