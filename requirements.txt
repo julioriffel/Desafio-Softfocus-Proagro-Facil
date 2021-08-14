@@ -7,15 +7,8 @@ psycopg2-binary~=2.9.1
 djangorestframework~=3.12.4
 drf-yasg~=1.20.0
 
-#django-filter~=2.4.0
-#django-chartjs~=2.2.1
-#django-pivot~=1.8.1
-
 django-view-breadcrumbs~=2.2.2
 six~=1.16.0
-
-
-
 
 django-debug-toolbar~=3.2.1
 gunicorn~=20.1.0

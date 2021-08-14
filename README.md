@@ -16,7 +16,7 @@ aprovado.
 
 Neste desafio, você irá criar uma versão simplificada da comunicação de perda.
 
-## Critérios essenciais
+### Critérios essenciais
 
 1. :heavy_check_mark: A solução deve ser desenvolvida em Python (utilize o framework de sua preferência);
 2. :heavy_check_mark: A solução deve possibilitar o cadastro, visualização, atualização e exclusão de uma comunicação de
@@ -59,10 +59,10 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 9. :heavy_check_mark: O projeto deverá ser disponibilizado em repositório online, como Github, Gitlab, etc;
 
-10. O repositório deve conter um arquivo README explicando como utilizar o projeto.
+10. :heavy_check_mark: O repositório deve conter um arquivo README explicando como utilizar o projeto.
 11. :heavy_check_mark: Implementar testes automatizados;
 
-## Critérios opcionais
+### Critérios opcionais
 
 - Utilizar um framework front-end (Angular, React, Vue, Ember JS, etc);
 - :heavy_check_mark: Deixar a comunicação de perda intuitiva e com uma interface agradável também será um diferencial (
@@ -73,46 +73,57 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 - :heavy_check_mark: Disponibilizar a documentação da API (Swagger, Apiary, Document360, etc);
 - Qualquer funcionalidade extra será bem-vinda.
 
-# Detalhes:
+## Detalhes:
 
-## POSTGIS
+### Requisitos
 
-### GeoDjango
+- Potgres com extensão Postgis[link](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
+- GeoDjango [requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
+  `sudo apt-get install binutils libproj-dev gdal-bin`
+- Django REST framework [link](https://www.django-rest-framework.org/)
 
-[GeoDjango requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
+Opcional (para execução com docker)
 
-`sudo apt-get install binutils libproj-dev gdal-bin`
+- [Docker](https://docs.docker.com/install/)
+- [Docker-compose](https://docs.docker.com/compose/)
 
 ```shell
-python -m venv venv
+git clone git@github.com:julioriffel/Desafio-Softfocus-Proagro-Facil.git
+cd Desafio-Softfocus-Proagro-Facil
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt -U
-
 ```
 
-### Testes
+## Orientações
 
-![](media/coverage_geral.svg)
+As variáveis de ambiente para o projeto, como debug e configurações de banco de dados dever ser ajustadas nos
+arquivos`.env` `.env.prod`¹ `.env.prod.db`¹
+
+¹=Exclusivo para Docker
+
+### Debug Local
 
 ```shell
-python manage.py test
-pip install coverage
-coverage run --source=proagro,api,conta manage.py test
-coverage report
-```
+cp .env.example .env
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+``` 
 
-# Orientações
+*Requer banco de dados Postgis
 
-### Testes/Homologação
+Disponivel em: [http://localhost:8000](http://localhost)
+
+### Docker
 
 Requer `docker + docker-compose` e a porta `80` disponível
 
 ```shell
 cp .env.example .env
-cp .env.prod.db.example .env.prod.db
 cp .env.prod.example .env.prod
-docker-compose up -d
+cp .env.prod.db.example .env.prod.db
+docker-compose up -d [--build]
 docker-compose exec web python manage.py migrate
 docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py loaddata fixtures/proagro.json
@@ -122,15 +133,78 @@ Disponivel em: [http://localhost](http://localhost)
 
 ### Api
 
+A documentação da API foi gerada no formato OpenAPI, com a
+biblioteca [drf-yasg](https://drf-yasg.readthedocs.io/en/stable/). A qual provê interfaces (swagger e redoc) para
+visualizar a documentação e interagir com os endpoints.
+
+Exemplo da documentação dos endpoints API, acessível em `swagger/`.
 ![](media/swagger.png)
 
-## DumpData
+### Testes
 
-`python manage.py dumpdata --exclude=contenttypes --exclude=auth.Permission > fixtures/all.json`
+```shell
+python manage.py test
+```
 
-`python manage.py dumpdata --exclude=contenttypes --exclude=auth.Permission > /home/julioriffel/Dropbox/devs/adapar/adapar_rede/all.json`
+Cobertura de Teste com `coverage`
 
-### Referências:
+```shell
+pip install coverage
+coverage run manage.py test
+coverage report #Exibir no Terminal
+coverage html #Gerar Detalhes em Html
+google-chrome htmlcov/index.html #Abrir relatório no Google chrome
+```
+
+```shell
+Name                                            Stmts   Miss  Cover
+-------------------------------------------------------------------
+api/__init__.py                                     0      0   100%
+api/api_docs.py                                     8      0   100%
+api/apps.py                                         4      0   100%
+api/migrations/__init__.py                          0      0   100%
+api/serializers.py                                 14      0   100%
+api/tests/__init__.py                               0      0   100%
+api/tests/test_comunicado.py                       80      0   100%
+api/tests/test_cultura.py                          61      0   100%
+api/tests/test_serializer.py                       15      0   100%
+api/urls.py                                         7      0   100%
+api/views.py                                       14      0   100%
+conta/__init__.py                                   0      0   100%
+conta/admin.py                                      1      0   100%
+conta/apps.py                                       4      0   100%
+conta/forms.py                                     11      0   100%
+conta/migrations/__init__.py                        0      0   100%
+conta/models.py                                     1      0   100%
+conta/tests/__init__.py                             0      0   100%
+conta/tests/tests_view.py                          27      0   100%
+conta/urls.py                                       3      0   100%
+conta/views.py                                     23      0   100%
+core/__init__.py                                    0      0   100%
+core/settings.py                                   31      0   100%
+core/urls.py                                        7      0   100%
+proagro/__init__.py                                 0      0   100%
+proagro/admin.py                                    3      0   100%
+proagro/apps.py                                     4      0   100%
+proagro/forms.py                                    8      0   100%
+proagro/migrations/0001_initial.py                  9      0   100%
+proagro/migrations/0002_alter_cultura_nome.py       4      0   100%
+proagro/migrations/__init__.py                      0      0   100%
+proagro/models.py                                  29      0   100%
+proagro/templatetags/__init__.py                    0      0   100%
+proagro/templatetags/urlparams.py                  11      0   100%
+proagro/tests/__init__.py                           0      0   100%
+proagro/tests/test_form.py                         66      0   100%
+proagro/tests/test_model.py                        33      0   100%
+proagro/tests/test_view.py                        104      0   100%
+proagro/urls.py                                     4      0   100%
+proagro/util_proagro.py                            15      0   100%
+proagro/views.py                                   64      0   100%
+-------------------------------------------------------------------
+TOTAL                                             665      0   100%
+
+```
+
+### Outras referências:
 
 [Template Argon](https://github.com/creativetimofficial/argon-dashboard-django)
-, [coverage-badge](https://github.com/dbrgn/coverage-badge),  

@@ -37,3 +37,4 @@ fixtures/*
 .env.prod
 .env.prod.db
 req_lib/
+htmlcov/
