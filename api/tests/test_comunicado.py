@@ -24,6 +24,7 @@ class CreateComunicadoTest(APITestCase):
                            'latitude': -22.123, 'longitude': -52.123, 'cultura': self.cultura.id,
                            'datacolheita': '2021-10-10', 'evento': "GEA"}
 
+
         self.invalid_data = {'cpf': '06889117905', 'nome': 'Julio', 'email': 'julioriffel@gmail.com',
                              'latitude': -22.123, 'longitude': None, 'cultura_id': self.cultura.id,
                              'datacolheita': '2021-01-30', 'evento': "GEA"}
@@ -72,6 +73,30 @@ class CreateComunicadoTest(APITestCase):
         self.client.login(username='user1', password='abcd1234')
         response = self.client.post(self.url, data=json.dumps(self.valid_data), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_latitude_min_fail(self):
+        data = self.valid_data.copy()
+        data['latitude'] = -35.11
+        response = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_latitude_max_fail(self):
+        data = self.valid_data.copy()
+        data['latitude'] = 7.11
+        response = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_longitude_min_fail(self):
+        data = self.valid_data.copy()
+        data['longitude'] = -74.01
+        response = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_create_longitude_max_fail(self):
+        data = self.valid_data.copy()
+        data['longitude'] = -6.99
+        response = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
 class UpdateComunicadoTest(APITestCase):

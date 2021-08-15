@@ -64,7 +64,7 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 ### Critérios opcionais
 
-- Utilizar um framework front-end (Angular, React, Vue, Ember JS, etc);
+- :heavy_check_mark: Utilizar um framework front-end (Angular, React, Vue, Ember JS, etc);
 - :heavy_check_mark: Deixar a comunicação de perda intuitiva e com uma interface agradável também será um diferencial (
   utilização de CSS);
 - Fazer deploy do projeto (ex.: Heroku, Surge.sh, Pythonanywhere, AWS, etc)
@@ -77,7 +77,7 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 ### Requisitos
 
-- Potgres com extensão Postgis[link](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
+- Potgres com extensão Postgis [docs](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
 - GeoDjango [requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
   `sudo apt-get install binutils libproj-dev gdal-bin`
 - Django REST framework [link](https://www.django-rest-framework.org/)
@@ -131,6 +131,8 @@ docker-compose exec web python manage.py loaddata fixtures/proagro.json
 
 Disponivel em: [http://localhost](http://localhost)
 
+### Deploy
+
 ### Api
 
 A documentação da API foi gerada no formato OpenAPI, com a
@@ -140,6 +142,7 @@ visualizar a documentação e interagir com os endpoints.
 Exemplo da documentação dos endpoints API, acessível em `swagger/`.
 ![](media/swagger.png)
 
+:exclamation: Api Publica (autenticação pendênte) :exclamation:
 ### Testes
 
 ```shell

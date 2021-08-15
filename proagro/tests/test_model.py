@@ -1,5 +1,6 @@
 #  Copyright (c) 2021.
 #  Julio Cezar Riffel<julioriffel@gmail.com>
+
 from django.test import TestCase
 
 from proagro.models import Cultura, Comunicado
@@ -37,14 +38,41 @@ class CulturaClass(TestCase):
 
 
 class ComunicadoClass(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        milho, create = Cultura.objects.get_or_create(nome="Milho")
-        evento = Comunicado.EVENTO_CHOISE[0][0]
+
+    def setUp(self):
+        self.milho, create = Cultura.objects.get_or_create(nome="Milho")
+        self.evento = Comunicado.EVENTO_CHOISE[0][0]
 
         Comunicado.objects.create(cpf=gerarCPF(), nome="Julio Cezar Riffel", latitude=gerarLatitude(),
-                                  longitude=gerarLongitude(), cultura=milho, evento=evento, datacolheita='2021-07-20')
+                                  longitude=gerarLongitude(), cultura=self.milho, evento=self.evento,
+                                  datacolheita='2021-07-20')
 
     def test_get_absolute_url(self):
         comunicado = Comunicado.objects.first()
         self.assertEquals(comunicado.get_absolute_url(), f'/comunicados/{comunicado.id}')
+
+    def test_latitude_longitude_ok(self):
+        c = Comunicado(cpf=gerarCPF(), nome="Julio Cezar Riffel", latitude=gerarLatitude(),
+                       longitude=gerarLongitude(), cultura=self.milho, evento=self.evento,
+                       datacolheita='2021-07-20')
+        self.assertEquals(c.clean(), None)
+
+    def test_latitude_min_fail(self):
+        c = Comunicado(latitude=-34.01)
+        with self.assertRaisesMessage(Exception, "['Latitude no Brasil deve estar entre -34 e +6']"):
+            c.clean()
+
+    def test_latitude_max_fail(self):
+        c = Comunicado(latitude=6.01)
+        with self.assertRaisesMessage(Exception, "['Latitude no Brasil deve estar entre -34 e +6']"):
+            c.clean()
+
+    def test_longitude_min_fail(self):
+        c = Comunicado(longitude=-74.01)
+        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -7']"):
+            c.clean()
+
+    def test_longitude_max_fail(self):
+        c = Comunicado(longitude=-6.99)
+        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -7']"):
+            c.clean()

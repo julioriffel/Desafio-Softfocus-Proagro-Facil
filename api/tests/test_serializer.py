@@ -2,7 +2,7 @@
 #  Julio Cezar Riffel<julioriffel@gmail.com>
 from django.test import TestCase
 
-from api.serializers import CulturaSerializer, ComunicadoSerializer
+from api.serializers import CulturaSerializer, ComunicadoFullSerializer, ComunicadoSerializer
 from proagro import util_proagro
 from proagro.models import Cultura
 
@@ -24,6 +24,12 @@ class SerializerTest(TestCase):
 
     def test_comunicado_serializer(self):
         serializer = ComunicadoSerializer(self.comunicado_data)
+        self.assertCountEqual(serializer.data.keys(),
+                              ['id', 'cpf', 'nome', 'cultura', 'latitude', 'longitude', 'datacolheita', 'email',
+                               'evento', 'distance'])
+
+    def test_comunicadofull_serializer(self):
+        serializer = ComunicadoFullSerializer(self.comunicado_data)
         self.assertCountEqual(serializer.data.keys(),
                               ['id', 'cpf', 'nome', 'cultura', 'latitude', 'longitude', 'datacolheita', 'email',
                                'evento'])

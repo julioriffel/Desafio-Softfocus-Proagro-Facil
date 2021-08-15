@@ -166,7 +166,7 @@
                                 </thead>
                                 <tbody>
 
-                                {% for item in prox %}
+                                {% for item in object.proximo %}
                                     <tr>
                                         <td>
                                             <a href="{% url 'proagro:detail' pk=item.id %}">{{ item.id }} </a>

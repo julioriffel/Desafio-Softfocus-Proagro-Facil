@@ -1,9 +1,8 @@
 #  Copyright (c) 2021.
 #  Julio Cezar Riffel<julioriffel@gmail.com>
-
 from rest_framework import viewsets
 
-from api.serializers import CulturaSerializer, ComunicadoSerializer
+from api.serializers import CulturaSerializer, ComunicadoFullSerializer
 from proagro.models import Cultura, Comunicado
 
 
@@ -14,7 +13,7 @@ class CulturaViewSet(viewsets.ModelViewSet):
 
 class ComunicadoViewSet(viewsets.ModelViewSet):
     queryset = Comunicado.objects.order_by('-datacolheita')
-    serializer_class = ComunicadoSerializer
+    serializer_class = ComunicadoFullSerializer
 
     def perform_create(self, serializer):
         user = None

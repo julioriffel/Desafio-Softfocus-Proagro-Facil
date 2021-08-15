@@ -3,8 +3,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.gis.db.models.functions import Distance
-from django.contrib.gis.measure import D
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -47,8 +45,6 @@ class ComunicadoCreate(LoginRequiredMixin, SuccessMessageMixin, generic.CreateVi
     form_class = ComunicadoForm
     success_message = "Salvo"
 
-    # success_url = reverse_lazy("proagro:index")
-
     def form_valid(self, form):
         comunicado = form.save(commit=False)
         comunicado.usuario = self.request.user
@@ -73,19 +69,8 @@ class ComunicadoDetail(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        distance = 10000
-        ref_location = self.object.ponto
 
-        context['prox'] = Comunicado.objects.exclude(id=self.object.pk).filter(
-            ponto__dwithin=(ref_location, distance)).annotate(
-            distance=Distance('ponto', ref_location)).order_by('distance')[:10]
-
-        qtd = Comunicado.objects.exclude(id=self.object.pk).exclude(evento=self.object.evento).filter(
-            ponto__dwithin=(ref_location, distance)).filter(
-            ponto__distance_lte=(ref_location, D(m=distance))).filter(
-            datacolheita=self.object.datacolheita).count()
-
-        if qtd > 0:
+        if self.object.divergente():
             messages.warning(self.request, 'Atenção: Evento Divergente')
 
         return context
