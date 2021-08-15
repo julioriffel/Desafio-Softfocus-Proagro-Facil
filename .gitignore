@@ -38,3 +38,4 @@ fixtures/*
 .env.prod.db
 req_lib/
 htmlcov/
+app.yaml

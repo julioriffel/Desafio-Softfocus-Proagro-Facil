@@ -1,0 +1,28 @@
+# [START django_app]
+runtime: python39
+
+handlers:
+  - url: /favicon.ico
+    static_files: staticfiles/favicon.ico
+    upload: staticfiles/favicon.ico
+  - url: /robots.txt
+    static_files: staticfiles/robots.txt
+    upload: staticfiles/robots.txt
+  - url: /static
+    static_dir: staticfiles/
+
+  # This handler routes all requests not caught above to your main app. It is
+  # required when static routes are defined, but can be omitted (along with
+  # the entire handlers section) when there are no static files defined.
+  - url: /.*
+    secure: always
+    script: auto
+  # [END django_app]
+
+# [START env_variables]
+env_variables:
+  SECRET_KEY: XXXXXXXXXXXXXXXXXXXXXXXXX
+  DEBUG: False
+  ALLOWED_HOSTS: 127.0.0.1,0.0.0.0
+  DATABASE_URL: postgis://USER:PASS@HOST:5432/DATABASE
+# [END env_variables]

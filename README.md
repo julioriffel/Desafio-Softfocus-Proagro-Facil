@@ -1,4 +1,5 @@
-![](media/coverage_geral.svg)
+![](media/coverage_geral.svg)  | **Este projeto está em execução em [link](http://104.131.20.162:8080/) Usuario:usuario
+Senha:usuario4567** |
 
 # Desafio Softfocus
 
@@ -122,12 +123,11 @@ segurança ao aplicativo.
 
 ![](media/ambiente_docker.jpg)
 
-`O navegador da Web faz uma solicitação que vai primeiro para o Nginx (servidor proxy), o Nginx atua como um proxy e envia essa solicitação para o Gunicorn (servidor Http python). O Gunicorn recebe isso e se comunica com o aplicativo da web por meio de uma interface chamada interface de gateway do servidor da web (WSGI).`
+Fluxo:`O navegador da Web faz uma solicitação que vai primeiro para o Nginx (servidor proxy), o Nginx atua como um proxy e envia essa solicitação para o Gunicorn (servidor Http python). O Gunicorn recebe isso e se comunica com o aplicativo da web por meio de uma interface chamada interface de gateway do servidor da web (WSGI).`
 
 Requer `docker + docker-compose` e a porta `80` disponível
 
 ```shell
-cp .env.example .env
 cp .env.prod.example .env.prod
 cp .env.prod.db.example .env.prod.db
 docker-compose up -d [--build]
@@ -138,7 +138,24 @@ docker-compose exec web python manage.py loaddata fixtures/proagro.json
 
 Disponivel em: [http://localhost](http://localhost)
 
-### Deploy
+## Deploy
+
+### Google App Engine Standard
+
+Requer [SDK](https://cloud.google.com/sdk/docs/install?hl=pt-br) do GCP
+
+```shell
+cp app.yaml.example app.yaml
+#Ajustar configuraçoes de DB no app.yaml
+gcloud app deploy
+```
+
+[Documentação](https://cloud.google.com/python/django/appengine?hl=pt-br)
+
+Este projeto não é compativel com Google App Engine **Standard** pois o GeoDjango requer os pacotes da
+plataforma `libgdale`
+`gdal-devel` não instaladas neste ambiente. Como alternativa é possivel realizar o deploy
+no [Google App Engine Flex](https://cloud.google.com/python/django/flexible-environment?hl=pt-br)
 
 ### Api
 
@@ -173,11 +190,11 @@ api/__init__.py                                     0      0   100%
 api/api_docs.py                                     8      0   100%
 api/apps.py                                         4      0   100%
 api/migrations/__init__.py                          0      0   100%
-api/serializers.py                                 14      0   100%
+api/serializers.py                                 25      0   100%
 api/tests/__init__.py                               0      0   100%
-api/tests/test_comunicado.py                       80      0   100%
+api/tests/test_comunicado.py                      100      0   100%
 api/tests/test_cultura.py                          61      0   100%
-api/tests/test_serializer.py                       15      0   100%
+api/tests/test_serializer.py                       18      0   100%
 api/urls.py                                         7      0   100%
 api/views.py                                       14      0   100%
 conta/__init__.py                                   0      0   100%
@@ -200,19 +217,18 @@ proagro/forms.py                                    8      0   100%
 proagro/migrations/0001_initial.py                  9      0   100%
 proagro/migrations/0002_alter_cultura_nome.py       4      0   100%
 proagro/migrations/__init__.py                      0      0   100%
-proagro/models.py                                  29      0   100%
+proagro/models.py                                  49      0   100%
 proagro/templatetags/__init__.py                    0      0   100%
 proagro/templatetags/urlparams.py                  11      0   100%
 proagro/tests/__init__.py                           0      0   100%
 proagro/tests/test_form.py                         66      0   100%
-proagro/tests/test_model.py                        33      0   100%
+proagro/tests/test_model.py                        51      0   100%
 proagro/tests/test_view.py                        104      0   100%
 proagro/urls.py                                     4      0   100%
 proagro/util_proagro.py                            15      0   100%
-proagro/views.py                                   64      0   100%
+proagro/views.py                                   58      0   100%
 -------------------------------------------------------------------
-TOTAL                                             665      0   100%
-
+TOTAL                                             731      0   100%
 ```
 
 ### Outras referências:
