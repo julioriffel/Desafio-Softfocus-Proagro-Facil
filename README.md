@@ -117,6 +117,13 @@ Disponivel em: [http://localhost:8000](http://localhost)
 
 ### Docker
 
+Para executar django em produção é necessário rodar com **Gunicorn** e usar **Nginx** como proxy reverso para dar mais
+segurança ao aplicativo.
+
+![](media/ambiente_docker.jpg)
+
+`O navegador da Web faz uma solicitação que vai primeiro para o Nginx (servidor proxy), o Nginx atua como um proxy e envia essa solicitação para o Gunicorn (servidor Http python). O Gunicorn recebe isso e se comunica com o aplicativo da web por meio de uma interface chamada interface de gateway do servidor da web (WSGI).`
+
 Requer `docker + docker-compose` e a porta `80` disponível
 
 ```shell
