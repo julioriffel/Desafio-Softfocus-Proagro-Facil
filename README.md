@@ -1,5 +1,5 @@
-![](media/coverage_geral.svg)  | **Este projeto está em execução em [link](http://104.131.20.162:8080/) Usuario:usuario
-Senha:usuario4567** |
+![](media/coverage_geral.svg)  | **Este projeto está em execução em [link](http://104.131.20.162:8080/) Usuario:user
+Senha:user4567** |
 
 # Desafio Softfocus
 
@@ -76,6 +76,7 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 ## Detalhes:
 
+![](media/home.png)
 ### Requisitos
 
 - Potgres com extensão Postgis [docs](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
