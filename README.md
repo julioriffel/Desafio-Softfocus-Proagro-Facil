@@ -68,11 +68,11 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 - :heavy_check_mark: Utilizar um framework front-end (Angular, React, Vue, Ember JS, etc);
 - :heavy_check_mark: Deixar a comunicação de perda intuitiva e com uma interface agradável também será um diferencial (
   utilização de CSS);
-- Fazer deploy do projeto (ex.: Heroku, Surge.sh, Pythonanywhere, AWS, etc)
+- :heavy_check_mark: Fazer deploy do projeto (ex.: Heroku, Surge.sh, Pythonanywhere, AWS, etc)
   e disponibilizar a URL para acesso;
 - :heavy_check_mark: Disponibilizar a aplicação em forma de API para consulta e manipulação das comunicações de perda;
 - :heavy_check_mark: Disponibilizar a documentação da API (Swagger, Apiary, Document360, etc);
-- Qualquer funcionalidade extra será bem-vinda.
+- :heavy_check_mark: Qualquer funcionalidade extra será bem-vinda.
 
 ## Detalhes:
 
