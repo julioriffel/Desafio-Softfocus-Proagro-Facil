@@ -77,6 +77,9 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 ## Detalhes:
 
 ![](media/home.png)
+
+![](media/detalhes.png)
+
 ### Requisitos
 
 - Potgres com extensão Postgis [docs](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)

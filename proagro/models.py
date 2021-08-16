@@ -40,7 +40,7 @@ class Comunicado(models.Model):
     )
     longitude = models.FloatField(
         validators=[
-            MaxValueValidator(-7),
+            MaxValueValidator(-34),
             MinValueValidator(-74)
         ]
     )
@@ -56,8 +56,8 @@ class Comunicado(models.Model):
     def clean(self):
         if (self.latitude and not (self.latitude >= -34 and self.latitude <= 6)):
             raise ValidationError(_('Latitude no Brasil deve estar entre -34 e +6'))
-        if self.longitude and not (self.longitude >= -74 and self.longitude <= -7):
-            raise ValidationError(_('Longitude no Brasil deve estar entre -74 e -7'))
+        if self.longitude and not (self.longitude >= -74 and self.longitude <= -34):
+            raise ValidationError(_('Longitude no Brasil deve estar entre -74 e -34'))
 
     def get_absolute_url(self):
         from django.urls import reverse

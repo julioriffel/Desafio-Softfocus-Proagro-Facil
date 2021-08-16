@@ -20,7 +20,7 @@ def gerarLatitude():
 
 
 def gerarLongitude():
-    return randint(-7400, -700) / 100
+    return randint(-7400, -3300) / 100
 
 
 def gerarData():
