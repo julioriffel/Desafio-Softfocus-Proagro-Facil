@@ -75,6 +75,11 @@ class ComunicadoDetail(LoginRequiredMixin, generic.DetailView):
 
         return context
 
+    def get_queryset(self):
+        queryset = super(ComunicadoDetail, self).get_queryset()
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+        return queryset.filter(id=pk).select_related('cultura')
+
 
 @login_required()
 def delete(request, pk):

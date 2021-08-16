@@ -9,6 +9,7 @@ from django.contrib.gis.measure import D
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 
@@ -77,6 +78,7 @@ class Comunicado(models.Model):
         else:
             return False
 
+    @cached_property
     def divergentes(self):
         distance = 10000
         return Comunicado.objects.exclude(id=self.pk).exclude(evento=self.evento).filter(
@@ -84,6 +86,7 @@ class Comunicado(models.Model):
             ponto__distance_lte=(self.ponto, D(m=distance))).annotate(
             distance=Distance('ponto', self.ponto)).order_by('distance').select_related('cultura')[:10]
 
+    @cached_property
     def proximo(self, qtd=10):
         return Comunicado.objects.exclude(id=self.pk).annotate(
             distance=Distance('ponto', self.ponto)).order_by('distance').select_related('cultura')[:qtd]
