@@ -69,10 +69,10 @@ class ComunicadoClass(TestCase):
 
     def test_longitude_min_fail(self):
         c = Comunicado(longitude=-74.01)
-        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -7']"):
+        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -34']"):
             c.clean()
 
     def test_longitude_max_fail(self):
         c = Comunicado(longitude=-6.99)
-        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -7']"):
+        with self.assertRaisesMessage(Exception, "['Longitude no Brasil deve estar entre -74 e -34']"):
             c.clean()

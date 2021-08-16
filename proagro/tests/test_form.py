@@ -57,7 +57,7 @@ class ComunicadoFormTest(TestCase):
 
     def test_longitude_max_pass(self):
         lat_data = self.data_valido
-        lat_data['longitude'] = -7
+        lat_data['longitude'] = -34
         form = ComunicadoForm(data=lat_data)
         self.assertTrue(form.is_valid())
 
