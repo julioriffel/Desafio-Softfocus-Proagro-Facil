@@ -141,7 +141,7 @@ cython_debug/
 
 *.yml
 
-fixtures/
+#fixtures/
 lab/
 README.md
 #script/

@@ -82,7 +82,7 @@ Neste desafio, você irá criar uma versão simplificada da comunicação de per
 
 ### Requisitos
 
-- Potgres com extensão Postgis [docs](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
+- Postgres com extensão Postgis [docs](https://postgis.net/) [imagem docker](https://hub.docker.com/r/postgis/postgis)
 - GeoDjango [requisitos](https://docs.djangoproject.com/pt-br/3.2/ref/contrib/gis/install/geolibs/)
   `sudo apt-get install binutils libproj-dev gdal-bin`
 - Django REST framework [link](https://www.django-rest-framework.org/)

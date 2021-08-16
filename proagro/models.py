@@ -81,7 +81,7 @@ class Comunicado(models.Model):
         distance = 10000
         return Comunicado.objects.exclude(id=self.pk).exclude(evento=self.evento).filter(
             datacolheita=self.datacolheita).filter(
-            ponto__dwithin=(self.ponto, distance)).annotate(
+            ponto__distance_lte=(self.ponto, D(m=distance))).annotate(
             distance=Distance('ponto', self.ponto)).order_by('distance').select_related('cultura')[:10]
 
     def proximo(self, qtd=10):
